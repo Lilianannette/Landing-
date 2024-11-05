@@ -1,13 +1,23 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useNavigate } from 'react-router-dom';
 import '../assets/index.css'
 
 export default function Selection() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSelect = (image) => {
     setSelectedImage(image);
+    setTimeout(() => {
+      if(image === '/2.jpg') {
+        navigate('/Temple');
+      } else {
+        navigate('/Sanctuary');
+      }
+    }, 3000);
   };
+
 
   return (
     <>
@@ -20,7 +30,7 @@ export default function Selection() {
                 onClick={() => handleSelect('/2.jpg')}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 2 } }}
+                exit={{ opacity: 0, transition: { duration: 3 } }}
               >
                 <a href="#">
                   <h1 className='text-6xl font-bold italic text-pink'>Temple</h1>
@@ -31,7 +41,7 @@ export default function Selection() {
                 onClick={() => handleSelect('/13.jpg')}
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 2 } }}
+                exit={{ opacity: 0, transition: { duration: 3 } }}
                 
               >
                 <a href="#">
@@ -44,7 +54,7 @@ export default function Selection() {
               className="h-screen w-screen bg-cover bg-center"
               style={{ backgroundImage: `url(${selectedImage})` }}
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{ opacity: 1  , x: 0}}
               exit={{ opacity: 0 }}
               transition={{ duration: 2 }}
             >
